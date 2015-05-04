@@ -1,17 +1,14 @@
 ActiveAdmin.register OutsideIdentifierInstance do
+  permit_params :value, :outside_identifier_id
 
-# See permitted parameters documentation:
-# https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-#
-permit_params :value, :outside_identifier
-#
-# or
-#
-# permit_params do
-#   permitted = [:permitted, :attributes]
-#   permitted << :other if resource.something?
-#   permitted
-# end
+  form do |f|
+    inputs 'Details' do
+      input :value
+      input :outside_identifier_id
+    end
+    para "Press cancel to return to the list without saving."
+    actions
+  end
 
 
 end

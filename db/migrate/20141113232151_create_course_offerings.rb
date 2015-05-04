@@ -8,7 +8,7 @@ class CreateCourseOfferings < ActiveRecord::Migration
       t.references :outside_identifier_instances
       t.date :start_date, null: false
       t.date :end_date
-      t.time :start_time
+      t.time :start_time, null: false
       t.time :end_time
       t.string :meeting_days
       t.text :note

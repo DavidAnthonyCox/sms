@@ -110,8 +110,9 @@ ActiveRecord::Schema.define(version: 20150503152036) do
   end
 
   create_table "corporations", force: true do |t|
-    t.string   "name",        null: false
+    t.string   "name",                           null: false
     t.text     "description"
+    t.integer  "outside_identifier_instance_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -130,7 +131,7 @@ ActiveRecord::Schema.define(version: 20150503152036) do
     t.integer  "outside_identifier_instances_id"
     t.date     "start_date",                      null: false
     t.date     "end_date"
-    t.time     "start_time"
+    t.time     "start_time",                      null: false
     t.time     "end_time"
     t.string   "meeting_days"
     t.text     "note"
@@ -228,8 +229,13 @@ ActiveRecord::Schema.define(version: 20150503152036) do
   add_index "locations", ["course_offering_id"], name: "index_locations_on_course_offering_id"
 
   create_table "outside_identifier_instances", force: true do |t|
-    t.string   "value",                  null: false
-    t.integer  "outside_identifiers_id", null: false
+    t.string   "value",                 null: false
+    t.integer  "outside_identifier_id", null: false
+    t.integer  "person_id"
+    t.integer  "corporation_id"
+    t.integer  "course_provider_id"
+    t.integer  "course_template_id"
+    t.integer  "course_offering_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

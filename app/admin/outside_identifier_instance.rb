@@ -1,11 +1,9 @@
-# require 'activeadmin'
-
-ActiveAdmin.register Person do
+ActiveAdmin.register OutsideIdentifierInstance do
 
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
-permit_params :firstname, :middlename, :lastname, :ssn, :outside_identifier_instances
+permit_params :value, :outside_identifier
 #
 # or
 #

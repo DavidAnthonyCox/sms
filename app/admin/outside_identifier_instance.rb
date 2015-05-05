@@ -4,7 +4,7 @@ ActiveAdmin.register OutsideIdentifierInstance do
   form do |f|
     inputs 'Details' do
       input :value
-      input :outside_identifier_id
+      input :outside_identifier
     end
     para "Press cancel to return to the list without saving."
     actions

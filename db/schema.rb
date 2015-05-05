@@ -110,9 +110,8 @@ ActiveRecord::Schema.define(version: 20150503152036) do
   end
 
   create_table "corporations", force: true do |t|
-    t.string   "name",                           null: false
+    t.string   "name",        null: false
     t.text     "description"
-    t.integer  "outside_identifier_instance_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -126,12 +125,11 @@ ActiveRecord::Schema.define(version: 20150503152036) do
 
   create_table "course_offerings", force: true do |t|
     t.integer  "course_template_id"
-    t.integer  "course_format_id",                null: false
-    t.string   "name",                            null: false
-    t.integer  "outside_identifier_instances_id"
-    t.date     "start_date",                      null: false
+    t.integer  "course_format_id",   null: false
+    t.string   "name",               null: false
+    t.date     "start_date",         null: false
     t.date     "end_date"
-    t.time     "start_time",                      null: false
+    t.time     "start_time",         null: false
     t.time     "end_time"
     t.string   "meeting_days"
     t.text     "note"
@@ -143,8 +141,7 @@ ActiveRecord::Schema.define(version: 20150503152036) do
   add_index "course_offerings", ["course_template_id"], name: "index_course_offerings_on_course_template_id"
 
   create_table "course_providers", force: true do |t|
-    t.integer  "corporation_id",                  null: false
-    t.integer  "outside_identifier_instances_id"
+    t.integer  "corporation_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -164,9 +161,8 @@ ActiveRecord::Schema.define(version: 20150503152036) do
   add_index "course_purposes", ["license_id"], name: "index_course_purposes_on_license_id"
 
   create_table "course_templates", force: true do |t|
-    t.integer  "course_provider_id",              null: false
+    t.integer  "course_provider_id", null: false
     t.string   "syllabus_file_path"
-    t.integer  "outside_identifier_instances_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "default_name"
@@ -261,11 +257,10 @@ ActiveRecord::Schema.define(version: 20150503152036) do
   add_index "payors", ["tuition_id"], name: "index_payors_on_tuition_id"
 
   create_table "people", force: true do |t|
-    t.string   "firstname",                       null: false
+    t.string   "firstname",  null: false
     t.string   "middlename"
-    t.string   "lastname",                        null: false
+    t.string   "lastname",   null: false
     t.integer  "ssn"
-    t.integer  "outside_identifier_instances_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

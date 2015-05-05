@@ -1,5 +1,5 @@
 class CreateOutsideIdentifiers < ActiveRecord::Migration
-  # Ex: Entry for Florida Department of Financial Services if that entity uses a school number to identify the school
+  # Ex: State department that registers continuing education classes and teachers.
   def change
     create_table :outside_identifiers do |t|
       t.string :name, null: false

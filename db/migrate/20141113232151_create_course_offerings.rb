@@ -5,7 +5,6 @@ class CreateCourseOfferings < ActiveRecord::Migration
       t.references :course_format, index: true, null: false
       t.string :name, null: false
       # t.string :dfs_identity
-      t.references :outside_identifier_instances
       t.date :start_date, null: false
       t.date :end_date
       t.time :start_time, null: false

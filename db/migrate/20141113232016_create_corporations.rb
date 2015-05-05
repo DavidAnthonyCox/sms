@@ -3,7 +3,6 @@ class CreateCorporations < ActiveRecord::Migration
     create_table :corporations do |t|
       t.string :name, null: false
       t.text :description
-      t.references :outside_identifier_instance
 
       t.timestamps
     end

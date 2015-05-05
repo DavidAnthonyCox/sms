@@ -1,23 +1,26 @@
 # require 'activeadmin'
 
 ActiveAdmin.register Person do
-  permit_params :firstname, :middlename, :lastname, :ssn, :outside_identifier_instances
+  permit_params :firstname, :middlename, :lastname, 
+    :ssn, :outside_identifier_instances_attributes => [:id, :value, :person_id, :outside_identifier_id]
   
   form do |f|
 
-    inputs 'Name' do
-      input :firstname
-      input :middlename
-      input :lastname
+    f.inputs 'Name' do
+      f.input :firstname
+      f.input :middlename
+      f.input :lastname
     end
 
-    inputs 'Identifiers' do
-      input :ssn
-      input :outside_identifier_instances
+    f.inputs 'Identifiers' do
+      f.input :ssn
+      # has_many :outside_identifier_instances
     end
+
+    f.inputs :value, :for => :outside_identifier_instances_attributes
 
     para "Press cancel to return to the list without saving."
-    actions
+    f.actions
   end
 
 

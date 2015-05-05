@@ -6,7 +6,6 @@ class CreatePeople < ActiveRecord::Migration
       t.string :lastname, null: false
       t.integer :ssn # might be redundant with :outside_identifier_instances
       # t.string :dfs_identity
-      t.references  :outside_identifier_instances
 
       t.timestamps
     end

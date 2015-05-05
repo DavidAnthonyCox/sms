@@ -3,7 +3,6 @@ class CreateCourseProviders < ActiveRecord::Migration
     create_table :course_providers do |t|
       t.references :corporation, index: true, null: false
       # t.string :dfs_identity
-      t.references :outside_identifier_instances
 
       t.timestamps
     end

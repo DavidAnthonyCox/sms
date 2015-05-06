@@ -5,7 +5,7 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 # eh?
-/config/secrets.yml
+# /config/secrets.yml
 # /config/initializers/devise.rb
 
 # Ignore bundler config.

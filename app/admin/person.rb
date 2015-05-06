@@ -17,7 +17,16 @@ ActiveAdmin.register Person do
       # has_many :outside_identifier_instances
     end
 
-    f.inputs :value, :for => :outside_identifier_instances_attributes
+    # So this works....
+    # f.has_many :outside_identifier_instances do |instance|
+    #   instance.inputs
+    # end
+
+    f.panel 'Test' do
+      f.has_many :outside_identifier_instances, :label => 'Intsldkfjskdfj' do |instance|
+        instance.inputs 'Inputses My Precious'
+      end
+    end
 
     para "Press cancel to return to the list without saving."
     f.actions

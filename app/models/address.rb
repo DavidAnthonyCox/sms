@@ -7,5 +7,5 @@ class Address < ActiveRecord::Base
 end
 
 # a location has a name and an address
-# a corporation and a course offering both have locations, so we 
+# a organization and a course offering both have locations, so we 
 # only reference location or person here.

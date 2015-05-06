@@ -2,7 +2,7 @@ class CreateAddresses < ActiveRecord::Migration
   def change
     create_table :addresses do |t|
       t.references :contact_category, index: true, null: false
-      t.references :corporation, index: true
+      t.references :organization, index: true
       t.references :person, index: true
       t.references :state, index: true
       t.references :location, index: true
@@ -16,4 +16,4 @@ class CreateAddresses < ActiveRecord::Migration
     end
   end
 end
-# belongs_to person, corporation, contact_category, state, location
+# belongs_to person, organization, contact_category, state, location

@@ -1,5 +1,5 @@
 class Employment < ActiveRecord::Base
-  belongs_to :corporation
+  belongs_to :organization
   belongs_to :person
-  default_scope { order('corporation_id') }
+  default_scope { order('organization_id') }
 end

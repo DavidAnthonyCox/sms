@@ -2,7 +2,7 @@ class CreatePayors < ActiveRecord::Migration
   def change
     create_table :payors do |t|
       t.references :person, index: true
-      t.references :corporation, index: true
+      t.references :organization, index: true
       t.references :tuition, index: true, null: false
       t.text :note
 
@@ -10,4 +10,4 @@ class CreatePayors < ActiveRecord::Migration
     end
   end
 end
-# belongs_to tuition, person, corporation
+# belongs_to tuition, person, organization

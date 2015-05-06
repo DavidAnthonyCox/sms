@@ -1,4 +1,4 @@
-class Corporation < ActiveRecord::Base
+class organization < ActiveRecord::Base
   has_many :email
   has_many :location
   has_many :phone

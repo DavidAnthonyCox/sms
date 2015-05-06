@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     resources :tuition
     resources :licenses
     resources :license_helds
-    resources :corporations
+    resources :organizations
     resources :contact_categories
 
   # Example resource route with options:

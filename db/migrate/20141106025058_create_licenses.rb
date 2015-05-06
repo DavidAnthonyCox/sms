@@ -3,6 +3,7 @@ class CreateLicenses < ActiveRecord::Migration
     create_table :licenses do |t|
       t.string :name, null: false
       t.text :description
+      t.references :issuer
 
       t.timestamps
     end

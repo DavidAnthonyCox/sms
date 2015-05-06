@@ -3,11 +3,11 @@ class CreateLocations < ActiveRecord::Migration
     create_table :locations do |t|
       t.string :name, null: false
       t.references :course_offering, index: true
-      t.references :corporation, index: true
+      t.references :organization, index: true
 
       t.timestamps
     end
   end
 end
-# belongs_to course_offering, corporation
+# belongs_to course_offering, organization
 # has_one address

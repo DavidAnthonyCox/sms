@@ -5,4 +5,5 @@ class License < ActiveRecord::Base
 
     has_many :course_purpose
     has_many :license_held
+    has_one :organization, :foreign_key => "issuer_id"
 end

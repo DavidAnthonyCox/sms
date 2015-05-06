@@ -253,7 +253,6 @@ ActiveRecord::Schema.define(version: 20150503152036) do
     t.string   "firstname",  null: false
     t.string   "middlename"
     t.string   "lastname",   null: false
-    t.integer  "ssn"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

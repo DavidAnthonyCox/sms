@@ -6,7 +6,7 @@
 
 # eh?
 /config/secrets.yml
-/config/initializers/devise.rb
+# /config/initializers/devise.rb
 
 # Ignore bundler config.
 /.bundle

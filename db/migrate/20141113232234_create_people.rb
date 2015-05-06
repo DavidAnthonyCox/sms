@@ -4,7 +4,7 @@ class CreatePeople < ActiveRecord::Migration
       t.string :firstname, null: false
       t.string :middlename
       t.string :lastname, null: false
-      t.integer :ssn # might be redundant with :outside_identifier_instances
+      # t.integer :ssn # might be redundant with :identities
       # t.string :dfs_identity
 
       t.timestamps

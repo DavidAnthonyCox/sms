@@ -1,5 +1,5 @@
 class CreateLicenseHelds < ActiveRecord::Migration
-  # This whole model might be able to be abstracted away to outside_identifier_instances
+  # This whole model might be able to be abstracted away to identities
   def change
     create_table :license_helds do |t|
       t.string :license_number, null: false

@@ -2,7 +2,7 @@
 
 ActiveAdmin.register Person do
   permit_params :firstname, :middlename, :lastname, 
-    :ssn, :outside_identifier_instances_attributes => [:id, :value, :person_id, :outside_identifier_id]
+    :identities, :identities_attributes => [:id, :value, :person_id, :organization_id]
   
   form do |f|
 
@@ -12,18 +12,13 @@ ActiveAdmin.register Person do
       f.input :lastname
     end
 
-    f.inputs 'Identifiers' do
-      f.input :ssn
-      # has_many :outside_identifier_instances
-    end
-
     # So this works....
-    # f.has_many :outside_identifier_instances do |instance|
+    # f.has_many :identities do |instance|
     #   instance.inputs
     # end
 
-    f.panel 'Test' do
-      f.has_many :outside_identifier_instances, :label => 'Intsldkfjskdfj' do |instance|
+    f.panel 'Organizational Identities' do
+      f.has_many :identities, :label => 'Intsldkfjskdfj' do |instance|
         instance.inputs 'Inputses My Precious'
       end
     end

@@ -1,5 +1,5 @@
 class Role < ActiveRecord::Base
-  has_many role_list_entry
+  has_many :role_list_entry
   default_scope { order('name') }
 end
 

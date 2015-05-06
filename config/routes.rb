@@ -15,8 +15,8 @@ Rails.application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
     resources :people
-    resources :outside_identifier_instances
-    resources :outside_identifiers
+    resources :identities
+    resources :identitys
     resources :tuition
     resources :licenses
     resources :license_helds

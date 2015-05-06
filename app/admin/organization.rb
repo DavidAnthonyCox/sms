@@ -1,10 +1,10 @@
-ActiveAdmin.register OutsideIdentifier do
+ActiveAdmin.register Organization do
 
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
-permit_params :outside_identifier_instance, :name, :description
-menu :label => "Identifying"
+  permit_params :name, :description
+  # menu :label => "Identifying"
 #
 # or
 #

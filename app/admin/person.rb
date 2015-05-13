@@ -2,7 +2,7 @@
 
 ActiveAdmin.register Person do
   permit_params :firstname, :middlename, :lastname, 
-    :identities, :identities_attributes => [:id, :value, :person_id, :organization_id]
+    :identities, :identities_attributes => [:id, :value, :identity_type, :person_id, :organization_id]
   
   # @person = Person.find(params[:id])
   # controller do
@@ -16,12 +16,11 @@ ActiveAdmin.register Person do
     panel "Identifying Information" do
       table_for person.identities do
         column :organization do
-          person.identities
+          person.identities.first.organization.name
         end
         column :value do |v|
           v.value
         end
-        column :identities
       end
     end
   end
@@ -35,20 +34,21 @@ ActiveAdmin.register Person do
     end
 
     # So this works....
-    # f.has_many :identities do |instance|
-    #   instance.inputs
-    # end
-
-    f.panel 'Organizational Identities' do
-      f.has_many :identities, :label => 'Intsldkfjskdfj' do |instance|
-        instance.inputs 'Inputses My Precious'
-      end
+    f.has_many :identities, allow_destroy: true do |instance|
+      instance.input :organization
+      instance.input :identity_type, 
+        :as => :select, :collection => options_for_select([["SSN","SSN"],["License","License"],["Other","Other"]])
+      instance.input :value
     end
+
+    # f.panel 'Organizational Identities' do
+    #   f.has_many :identities, :label => 'Intsldkfjskdfj' do |instance|
+    #     instance.inputs 'Inputses My Precious'
+    #   end
+    # end
 
     para "Press cancel to return to the list without saving."
     f.actions
   end
-
-
 
 end

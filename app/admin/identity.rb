@@ -1,4 +1,5 @@
 ActiveAdmin.register Identity do
+  menu false
   permit_params :value, :organization_id
 
   form do |f|

@@ -41,6 +41,11 @@ ActiveAdmin.register Person do
           #   #   row this_address.city
           #   # end
             table_for person.addresses do
+
+              column do |this_addr|
+                this_addr.contact_category.name
+              end
+
               column do |this_addr| 
                 [this_addr.street_number, this_addr.street_name, this_addr.unit].join(" ")
                 "will this be the only thing I see?"

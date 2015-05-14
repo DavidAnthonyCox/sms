@@ -13,13 +13,17 @@ ActiveAdmin.register Person do
     
 
   show title: lambda {|pers| [pers.firstname, pers.middlename, pers.lastname].join(" ") } do
+    ids = person.identities
     panel "Identifying Information" do
-      table_for person.identities do
-        column :organization do
-          person.identities.first.organization.name
+      table_for ids do
+        column :organization do |this_id|
+          this_id.organization.name
         end
-        column :value do |v|
-          v.value
+        column :identity_type do |this_id|
+          this_id.identity_type
+        end
+        column :value do |this_id|
+          this_id.value
         end
       end
     end
@@ -37,7 +41,8 @@ ActiveAdmin.register Person do
     f.has_many :identities, allow_destroy: true do |instance|
       instance.input :organization
       instance.input :identity_type, 
-        :as => :select, :collection => options_for_select([["SSN","SSN"],["License","License"],["Other","Other"]])
+        :as => :select, :collection => options_for_select([["SSN","SSN"],["License","License"],["Other","Other"]], person.identities.first.identity_type)
+
       instance.input :value
     end
 

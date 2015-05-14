@@ -11,8 +11,9 @@ class Person < ActiveRecord::Base
     :class_name => 'ActivityNote', :foreign_key => 'logging_person_id'
   default_scope { order('lastname') }
 
-  accepts_nested_attributes_for :emails, :phones, :addresses, :employments, 
+  accepts_nested_attributes_for :emails, :phones, :employments, 
     :activity_notes, :license_helds, :role_list_entries, :activity_note_mades
   accepts_nested_attributes_for :identities, allow_destroy: true
+  accepts_nested_attributes_for :addresses, allow_destroy: true
 
 end

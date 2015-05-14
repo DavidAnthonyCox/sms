@@ -4,7 +4,8 @@ require 'andand'
 ActiveAdmin.register Person do
   permit_params :firstname, :middlename, :lastname, 
     :identities, :identities_attributes => [:id, :value, :identity_type, :person_id, :organization_id, :_destroy],
-    :phones_attributes => [:id, :person_id, :contact_category_id, :area_code, :number, :extension, :note, :_destroy]
+    :phones_attributes => [:id, :person_id, :contact_category_id, :area_code, :number, :extension, :note, :_destroy],
+    :addresses_attributes => [:id, :person_id, :contact_category_id, :state_id, :street_number, :street_name, :unit, :city, :zip, :_destroy]
   
   # @person = Person.find(params[:id])
   # controller do
@@ -21,17 +22,41 @@ ActiveAdmin.register Person do
       column do
         panel "Phones" do
           table_for person.phones do
-            column :type do |this_phone|
+            column do |this_phone|
               this_phone.contact_category.name
             end #type
-            column :number do |this_phone|
+            column do |this_phone|
               this_phone.area_code.to_s + " " + this_phone.number.to_s
             end #number
+            column do |this_phone|
+              "Ext: " + this_phone.extension
+            end #extension
           end
         end
         panel "Addresses" do
-          "Adresses\nAddresses"
-        end
+          #:contact_category_id, :state_id, :street_number, :street_name, :unit, :city, :zip
+          # table_for person.addresses do
+          #   # column do |this_address|
+          #   #   row this_address.street_name
+          #   #   row this_address.city
+          #   # end
+            attributes_table_for person.addresses do
+              row :address do |this_addr| 
+                [this_addr.street_number, this_addr.street_name, this_addr.unit].join(" ")
+                "will this be the only thing I see?"
+                "no, this probably will though"
+                raw("
+                  #{this_addr.street_number} #{this_addr.street_name}#{(", Unit: " + this_addr.unit) unless this_addr.unit.empty? } <br/>
+                  Houston, Texas 11111
+                  ")
+              end
+              # row :a, heading: nil do |this_addr| "hi" end #[this_addr.city, this_addr.state.name].join(" ") end#, this_addr.zip.to_s].join(" ") end
+              # row(' ') { true }
+              # row(' ') { :sdfkjsdlfj }
+            end
+          # end #table
+
+        end #panel addresses
       end #column
 
 
@@ -80,6 +105,18 @@ ActiveAdmin.register Person do
       end #column
 
       column do
+
+        panel "Addresses" do
+          f.has_many :addresses, heading: nil, allow_destroy: true do |instance|
+            instance.input :contact_category
+            instance.input :street_number
+            instance.input :street_name
+            instance.input :unit
+            instance.input :city
+            instance.input :state
+            instance.input :zip
+          end #has_many addresses
+        end #panel
 
         panel "Government / Organizational IDs" do
           f.has_many :identities, heading: nil, allow_destroy: true do |instance|

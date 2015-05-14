@@ -40,14 +40,14 @@ ActiveAdmin.register Person do
           #   #   row this_address.street_name
           #   #   row this_address.city
           #   # end
-            attributes_table_for person.addresses do
-              row :address do |this_addr| 
+            table_for person.addresses do
+              column do |this_addr| 
                 [this_addr.street_number, this_addr.street_name, this_addr.unit].join(" ")
                 "will this be the only thing I see?"
                 "no, this probably will though"
                 raw("
                   #{this_addr.street_number} #{this_addr.street_name}#{(", Unit: " + this_addr.unit) unless this_addr.unit.empty? } <br/>
-                  Houston, Texas 11111
+                  #{this_addr.city}, #{this_addr.state.name} #{this_addr.zip}
                   ")
               end
               # row :a, heading: nil do |this_addr| "hi" end #[this_addr.city, this_addr.state.name].join(" ") end#, this_addr.zip.to_s].join(" ") end

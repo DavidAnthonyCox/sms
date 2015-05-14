@@ -1,5 +1,6 @@
 # require 'activeadmin'
 require 'andand'
+require "#{Rails.root}/lib/formatting.rb"
 
 ActiveAdmin.register Person do
   permit_params :firstname, :middlename, :lastname, 
@@ -16,20 +17,26 @@ ActiveAdmin.register Person do
     
 
   show title: lambda {|pers| [pers.firstname, pers.middlename, pers.lastname].join(" ") } do
-    
+
     columns do
 
       column do
+
         panel "Phones" do
+
           table_for person.phones do
+
             column do |this_phone|
               this_phone.contact_category.name
-            end #type
+            end #contact_cat
+
             column do |this_phone|
-              this_phone.area_code.to_s + " " + this_phone.number.to_s
+              Formatting.phonify this_phone.area_code, this_phone.number
+              # "(#{this_phone.area_code.to_s}) #{this_phone.number.to_s.insert(3, "-")}"
             end #number
+
             column do |this_phone|
-              "Ext: " + this_phone.extension
+              "Extension: " + this_phone.extension unless this_phone.extension.empty?
             end #extension
           end
         end

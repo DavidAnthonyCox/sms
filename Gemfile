@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.7'
 # Use sqlite3 as the database for Active Record
@@ -29,3 +28,5 @@ gem 'spring',        group: :development
 gem 'activeadmin', github: 'activeadmin'
 
 gem 'devise'
+
+gem 'raganwald-andand', source: 'http://gems.github.com'

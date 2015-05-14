@@ -1,6 +1,7 @@
 ActiveAdmin.register Identity do
   menu false
-  permit_params :value, :organization_id
+  permit_params :value, :organization_id,
+    tags_attributes: [:_destroy]
 
   form do |f|
     inputs 'Details' do

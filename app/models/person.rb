@@ -12,7 +12,7 @@ class Person < ActiveRecord::Base
   default_scope { order('lastname') }
 
   accepts_nested_attributes_for :emails, :phones, :addresses, :employments, 
-    :activity_notes, :license_helds, :role_list_entries, :identities, 
-    :activity_note_mades
+    :activity_notes, :license_helds, :role_list_entries, :activity_note_mades
+  accepts_nested_attributes_for :identities, allow_destroy: true
 
 end

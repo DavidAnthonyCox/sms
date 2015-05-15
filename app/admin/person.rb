@@ -58,7 +58,7 @@ ActiveAdmin.register Person do
                 "will this be the only thing I see?"
                 "no, this probably will though"
                 raw("
-                  #{this_addr.street_number} #{this_addr.street_name}#{(", Unit: " + this_addr.unit) unless this_addr.unit.empty? } <br/>
+                  #{this_addr.street_number} #{this_addr.street_name}#{(", # " + this_addr.unit) unless this_addr.unit.empty? } <br/>
                   #{this_addr.city}, #{this_addr.state.name} #{this_addr.zip}
                   ")
               end

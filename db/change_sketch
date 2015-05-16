@@ -1,0 +1,47 @@
+# sketch of models to add/modify
+
+PaymentMethods
+id p
+category
+selections
+description
+
+RefundMethods
+id p
+name
+description
+
+CreditVoucher
+id p
+transaction fk
+#has transactable through transaction
+expiry_days
+
+
+#add to courseformat:
+refundmethod
+time_limit
+
+Transactables
+id p
+name
+price
+taxable null: false
+should_prepay null: false, default: true
+description
+
+Transactions
+id p
+payment_method fk
+transactable fk
+payor fk
+earned #integer
+
+#/
+
+remove tuition from models, add transaction:
+activitynotes
+payors
+
+
+/#

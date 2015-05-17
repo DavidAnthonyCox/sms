@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  voucher_key: MyString
+  transaction_id: 
+  expiry_days: 1
+  person_specific: false
+  transactable_type_id: 
+
+two:
+  voucher_key: MyString
+  transaction_id: 
+  expiry_days: 1
+  person_specific: false
+  transactable_type_id: 

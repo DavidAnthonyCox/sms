@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  payment_selection_id: 
+  description: MyText
+
+two:
+  name: MyString
+  payment_selection_id: 
+  description: MyText

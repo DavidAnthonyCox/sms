@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  item_id: 
+  transactable_type_id: 
+  price: 1
+  taxable: false
+  should_prepay: false
+
+two:
+  item_id: 
+  transactable_type_id: 
+  price: 1
+  taxable: false
+  should_prepay: false

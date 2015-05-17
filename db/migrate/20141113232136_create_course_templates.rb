@@ -3,7 +3,6 @@ class CreateCourseTemplates < ActiveRecord::Migration
     create_table :course_templates do |t|
       t.references :course_provider, index: true, null: false
       t.string :syllabus_file_path
-      # t.string :dfs_identity
 
       t.timestamps
     end

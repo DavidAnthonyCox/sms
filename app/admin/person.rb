@@ -3,6 +3,7 @@ require 'andand'
 require "#{Rails.root}/lib/formatting.rb"
 
 ActiveAdmin.register Person do
+  menu parent: 'People & Organizations', priority: 0
   permit_params :firstname, :middlename, :lastname, 
     :identities, :identities_attributes => [:id, :value, :identity_type, :person_id, :organization_id, :_destroy],
     :phones_attributes => [:id, :person_id, :contact_category_id, :area_code, :number, :extension, :note, :_destroy],

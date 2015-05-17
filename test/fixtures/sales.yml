@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  payment_category_id: 
+  payment_selection_id: 
+  sellable_id: 
+  payor_id: 
+  earned: 1
+  refunded: 1
+  debit: 1
+  credit: 1
+
+two:
+  payment_category_id: 
+  payment_selection_id: 
+  sellable_id: 
+  payor_id: 
+  earned: 1
+  refunded: 1
+  debit: 1
+  credit: 1

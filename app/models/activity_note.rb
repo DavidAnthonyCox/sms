@@ -4,7 +4,7 @@ class ActivityNote < ActiveRecord::Base
   belongs_to :person
   belongs_to :logging_person, :class_name => 'Person'
   belongs_to :organization
-  belongs_to :tuition
+  belongs_to :sale
   belongs_to :payor
   belongs_to :course_provider
   belongs_to :course_template

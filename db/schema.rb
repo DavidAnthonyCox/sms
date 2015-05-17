@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150513232758) do
+ActiveRecord::Schema.define(version: 20150517232434) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -34,7 +34,6 @@ ActiveRecord::Schema.define(version: 20150513232758) do
     t.integer  "person_id"
     t.integer  "logging_person_id",  null: false
     t.integer  "organization_id"
-    t.integer  "tuition_id"
     t.integer  "payor_id"
     t.integer  "course_provider_id"
     t.integer  "course_template_id"
@@ -43,6 +42,7 @@ ActiveRecord::Schema.define(version: 20150513232758) do
     t.text     "note",               null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "sale_id"
   end
 
   add_index "activity_notes", ["activity_note_id"], name: "index_activity_notes_on_activity_note_id"
@@ -53,8 +53,8 @@ ActiveRecord::Schema.define(version: 20150513232758) do
   add_index "activity_notes", ["organization_id"], name: "index_activity_notes_on_organization_id"
   add_index "activity_notes", ["payor_id"], name: "index_activity_notes_on_payor_id"
   add_index "activity_notes", ["person_id"], name: "index_activity_notes_on_person_id"
+  add_index "activity_notes", ["sale_id"], name: "index_activity_notes_on_sale_id"
   add_index "activity_notes", ["system_id"], name: "index_activity_notes_on_system_id"
-  add_index "activity_notes", ["tuition_id"], name: "index_activity_notes_on_tuition_id"
 
   create_table "activity_types", force: true do |t|
     t.string   "tag",         null: false
@@ -159,9 +159,23 @@ ActiveRecord::Schema.define(version: 20150513232758) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "default_name"
+    t.integer  "time_limit"
   end
 
   add_index "course_templates", ["course_provider_id"], name: "index_course_templates_on_course_provider_id"
+
+  create_table "credit_vouchers", force: true do |t|
+    t.string   "voucher_key"
+    t.integer  "sale_id"
+    t.integer  "expiry_days",      default: 367
+    t.boolean  "person_specific",  default: true, null: false
+    t.integer  "sellable_type_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "credit_vouchers", ["sale_id"], name: "index_credit_vouchers_on_sale_id"
+  add_index "credit_vouchers", ["sellable_type_id"], name: "index_credit_vouchers_on_sellable_type_id"
 
   create_table "emails", force: true do |t|
     t.integer  "contact_category_id", null: false
@@ -237,10 +251,26 @@ ActiveRecord::Schema.define(version: 20150513232758) do
     t.datetime "updated_at"
   end
 
+  create_table "payment_categories", force: true do |t|
+    t.string   "name"
+    t.integer  "payment_selection_id"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "payment_categories", ["payment_selection_id"], name: "index_payment_categories_on_payment_selection_id"
+
+  create_table "payment_selections", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "payors", force: true do |t|
     t.integer  "person_id"
     t.integer  "organization_id"
-    t.integer  "tuition_id",      null: false
     t.text     "note"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -248,7 +278,6 @@ ActiveRecord::Schema.define(version: 20150513232758) do
 
   add_index "payors", ["organization_id"], name: "index_payors_on_organization_id"
   add_index "payors", ["person_id"], name: "index_payors_on_person_id"
-  add_index "payors", ["tuition_id"], name: "index_payors_on_tuition_id"
 
   create_table "people", force: true do |t|
     t.string   "firstname",  null: false
@@ -273,6 +302,20 @@ ActiveRecord::Schema.define(version: 20150513232758) do
   add_index "phones", ["contact_category_id"], name: "index_phones_on_contact_category_id"
   add_index "phones", ["organization_id"], name: "index_phones_on_organization_id"
   add_index "phones", ["person_id"], name: "index_phones_on_person_id"
+
+  create_table "refund_methods", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "refund_reasons", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "role_list_entries", force: true do |t|
     t.integer  "person_id",          null: false
@@ -303,6 +346,72 @@ ActiveRecord::Schema.define(version: 20150513232758) do
     t.datetime "updated_at"
   end
 
+  create_table "sales", force: true do |t|
+    t.integer  "payment_category_id"
+    t.integer  "payment_selection_id"
+    t.integer  "sellable_id"
+    t.integer  "payor_id"
+    t.integer  "earned"
+    t.integer  "refunded"
+    t.integer  "debit"
+    t.integer  "credit"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sales", ["payment_category_id"], name: "index_sales_on_payment_category_id"
+  add_index "sales", ["payment_selection_id"], name: "index_sales_on_payment_selection_id"
+  add_index "sales", ["payor_id"], name: "index_sales_on_payor_id"
+  add_index "sales", ["sellable_id"], name: "index_sales_on_sellable_id"
+
+  create_table "sellable_course_offerings", force: true do |t|
+    t.integer  "course_offering_id"
+    t.integer  "sellable_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sellable_course_offerings", ["course_offering_id"], name: "index_sellable_course_offerings_on_course_offering_id"
+  add_index "sellable_course_offerings", ["sellable_id"], name: "index_sellable_course_offerings_on_sellable_id"
+
+  create_table "sellable_course_templates", force: true do |t|
+    t.integer  "course_template_id"
+    t.integer  "sellable_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sellable_course_templates", ["course_template_id"], name: "index_sellable_course_templates_on_course_template_id"
+  add_index "sellable_course_templates", ["sellable_id"], name: "index_sellable_course_templates_on_sellable_id"
+
+  create_table "sellable_products", force: true do |t|
+    t.integer  "product_id"
+    t.integer  "sellable_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sellable_products", ["product_id"], name: "index_sellable_products_on_product_id"
+  add_index "sellable_products", ["sellable_id"], name: "index_sellable_products_on_sellable_id"
+
+  create_table "sellable_types", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sellables", force: true do |t|
+    t.integer  "sellable_type_id"
+    t.integer  "price"
+    t.boolean  "taxable"
+    t.boolean  "should_prepay"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sellables", ["sellable_type_id"], name: "index_sellables_on_sellable_type_id"
+
   create_table "states", force: true do |t|
     t.string   "abbreviation", limit: 2, null: false
     t.string   "name",                   null: false
@@ -310,17 +419,25 @@ ActiveRecord::Schema.define(version: 20150513232758) do
     t.datetime "updated_at"
   end
 
-  create_table "tuitions", force: true do |t|
-    t.integer  "role_list_entry_id"
-    t.integer  "receivable",         default: 0,     null: false
-    t.integer  "paid",               default: 0,     null: false
-    t.integer  "refunded",           default: 0,     null: false
-    t.date     "date_paid"
-    t.boolean  "earned",             default: false, null: false
+  create_table "transactable_types", force: true do |t|
+    t.string   "name"
+    t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "tuitions", ["role_list_entry_id"], name: "index_tuitions_on_role_list_entry_id"
+  create_table "voucher_methods", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "voucher_reasons", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

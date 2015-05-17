@@ -3,5 +3,4 @@ class RoleListEntry < ActiveRecord::Base
   belongs_to :role
   belongs_to :role_list
   belongs_to :course_offering
-  has_one :tuition
 end

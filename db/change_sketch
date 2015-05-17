@@ -34,34 +34,53 @@ description
 CreditVoucher
 id p
 voucher_key #generate
-transaction fk
-#has transactable through transaction
+sale fk
+#has sellable through transaction
 expiry_days
 person_specific null: false #bool
-transactable_type fk
+sellable_type fk
 
 #add to courseformat:
 refundmethod
 time_limit
 
-TransactableType
+Product
 id p
 name
 description
 
-Transactable #attach to products, services, actions, etc to make them transactable
+SellableType
 id p
-item fk # store key of the thing you want to make transactable
-transactable_type fk
+name
+description
+
+Sellable #attach to products, services, actions, etc to make them transactable
+id p
+sellable_type fk
 price
 taxable null: false
 should_prepay null: false, default: true
 
-Transaction
+SellableProduct
+id p
+product fk
+sellable fk
+
+SellableCourseTemplate # default sellable values for courses inheriting the template
+id p
+course_template fk
+sellable fk
+
+SellableCourseOffering # should copy the value of parent templet - so courses of type change price individually if desired.
+id p
+course_offering fk
+sellable fk
+
+Sale
 id p
 payment_category fk
 payment_selection fk
-transactable fk
+sellable fk
 payor fk
 earned #integer
 refunded #integer
@@ -69,6 +88,9 @@ debit
 credit
 
 #/
+
+add Sale to models:
+activitynotes
 
 remove tuition from models:
 activitynotes

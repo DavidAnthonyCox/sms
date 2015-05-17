@@ -39,9 +39,15 @@ ActiveAdmin.setup do |config|
   # a namespace block. For example, to change the site title
   # within a namespace:
   #
-  #   config.namespace :admin do |admin|
-  #     admin.site_title = "Custom Admin Title"
-  #   end
+    config.namespace :admin do |admin|
+      admin.build_menu do |menu|
+        menu.add label: 'System Users', priority: 1
+        menu.add label: 'People & Organizations', priority: 2
+        menu.add label: 'Course Admin', priority: 3
+        menu.add label: 'Course Configuration', priority: 4
+        menu.add label: 'Data Attributes', priority: 5
+      end
+    end
   #
   # This will ONLY change the title for the admin section. Other
   # namespaces will continue to use the main "site_title" configuration.
@@ -122,7 +128,7 @@ ActiveAdmin.setup do |config|
   # config.comments = false
   #
   # You can disable the menu item for the comments index page:
-  # config.show_comments_in_menu = false
+  config.show_comments_in_menu = false
   #
   # You can change the name under which comments are registered:
   # config.comments_registration_name = 'AdminComment'

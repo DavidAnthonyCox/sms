@@ -4,7 +4,8 @@ ActiveAdmin.register CourseOffering do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
-# permit_params :list, :of, :attributes, :on, :model
+permit_params :name, :start_date, :end_date, :start_time, :end_time, :meeting_days, 
+  :note, :course_format_id, :course_template_id
 #
 # or
 #

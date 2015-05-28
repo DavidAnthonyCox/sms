@@ -4,7 +4,6 @@ class Person < ActiveRecord::Base
   has_many :addresses
   has_many :employments
   has_many :activity_notes
-  has_many :license_helds
   has_many :role_list_entries
   has_many :identities
   has_many :activity_note_mades, 
@@ -12,7 +11,7 @@ class Person < ActiveRecord::Base
   default_scope { order('lastname') }
 
   accepts_nested_attributes_for :emails, :phones, :employments, 
-    :activity_notes, :license_helds, :role_list_entries, :activity_note_mades
+    :activity_notes, :role_list_entries, :activity_note_mades
   accepts_nested_attributes_for :identities, allow_destroy: true
   accepts_nested_attributes_for :addresses, allow_destroy: true
 

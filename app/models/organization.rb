@@ -3,7 +3,6 @@ class Organization < ActiveRecord::Base
   has_many :location
   has_many :address, :through => :location
   has_many :phone
-  has_many :course_provider
   has_many :identity
   has_many :activity_note
   default_scope { order('name') }

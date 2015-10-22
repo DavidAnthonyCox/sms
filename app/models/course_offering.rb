@@ -6,5 +6,6 @@ class CourseOffering < ActiveRecord::Base
 
   has_one :role_list
   has_one :location
+  has_many :organization
   has_many :activity_note
 end

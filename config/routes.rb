@@ -15,5 +15,6 @@ Rails.application.routes.draw do
     resources :identitys
     resources :organizations
     resources :contact_categories
+    resources :course_offerings
 
 end

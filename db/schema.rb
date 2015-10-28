@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150528041800) do
+ActiveRecord::Schema.define(version: 20151028201546) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -134,9 +134,10 @@ ActiveRecord::Schema.define(version: 20150528041800) do
   add_index "course_offerings", ["course_template_id"], name: "index_course_offerings_on_course_template_id"
 
   create_table "course_providers", force: true do |t|
-    t.integer  "organization_id", null: false
+    t.integer  "organization_id",   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "{:index=>true}_id"
   end
 
   add_index "course_providers", ["organization_id"], name: "index_course_providers_on_organization_id"
@@ -154,15 +155,12 @@ ActiveRecord::Schema.define(version: 20150528041800) do
   add_index "course_purposes", ["license_id"], name: "index_course_purposes_on_license_id"
 
   create_table "course_templates", force: true do |t|
-    t.integer  "course_provider_id", null: false
     t.string   "syllabus_file_path"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "default_name"
     t.integer  "time_limit"
   end
-
-  add_index "course_templates", ["course_provider_id"], name: "index_course_templates_on_course_provider_id"
 
   create_table "credit_vouchers", force: true do |t|
     t.string   "voucher_key"

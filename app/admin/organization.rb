@@ -23,15 +23,15 @@ ActiveAdmin.register Organization do
 
       column do
 
-        # panel "Government / Organizational IDs" do
-        #   f.has_many :identities, heading: nil, allow_destroy: true do |instance|
-        #     instance.input :organization
-        #     instance.input :identity_type, 
-        #       :as => :select, :collection => options_for_select([["SSN","SSN"],
-        #         ["License","License"],["Provider ID", "Provider ID"],["Other","Other"]], instance.object.andand.identity_type)
-        #     instance.input :value
-        #   end #identities
-        # end #panel
+        panel "Government / Organizational IDs" do
+          f.has_many :identities, heading: nil, allow_destroy: true do |instance|
+            instance.input :organization
+            instance.input :identity_type, 
+              :as => :select, :collection => options_for_select([["SSN","SSN"],
+                ["License","License"],["Provider ID", "Provider ID"],["Other","Other"]], instance.object.andand.identity_type)
+            instance.input :value
+          end #identities
+        end #panel
 
       end #column
       

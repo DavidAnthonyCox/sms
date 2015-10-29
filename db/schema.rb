@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151029150849) do
+ActiveRecord::Schema.define(version: 20151029201144) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -128,10 +128,14 @@ ActiveRecord::Schema.define(version: 20151029150849) do
     t.text     "note"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "organization_id"
+    t.integer  "identity_id"
   end
 
   add_index "course_offerings", ["course_format_id"], name: "index_course_offerings_on_course_format_id"
   add_index "course_offerings", ["course_template_id"], name: "index_course_offerings_on_course_template_id"
+  add_index "course_offerings", ["identity_id"], name: "index_course_offerings_on_identity_id"
+  add_index "course_offerings", ["organization_id"], name: "index_course_offerings_on_organization_id"
 
   create_table "course_providers", force: true do |t|
     t.integer  "organization_id",   null: false

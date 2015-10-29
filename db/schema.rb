@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151028201546) do
+ActiveRecord::Schema.define(version: 20151029144241) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -318,7 +318,6 @@ ActiveRecord::Schema.define(version: 20151028201546) do
   create_table "role_list_entries", force: true do |t|
     t.integer  "person_id",          null: false
     t.integer  "role_id",            null: false
-    t.integer  "role_list_id",       null: false
     t.integer  "course_offering_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -327,15 +326,6 @@ ActiveRecord::Schema.define(version: 20151028201546) do
   add_index "role_list_entries", ["course_offering_id"], name: "index_role_list_entries_on_course_offering_id"
   add_index "role_list_entries", ["person_id"], name: "index_role_list_entries_on_person_id"
   add_index "role_list_entries", ["role_id"], name: "index_role_list_entries_on_role_id"
-  add_index "role_list_entries", ["role_list_id"], name: "index_role_list_entries_on_role_list_id"
-
-  create_table "role_lists", force: true do |t|
-    t.integer  "course_offering_id", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "role_lists", ["course_offering_id"], name: "index_role_lists_on_course_offering_id"
 
   create_table "roles", force: true do |t|
     t.string   "name",        null: false

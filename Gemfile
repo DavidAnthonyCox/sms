@@ -30,3 +30,5 @@ gem 'activeadmin', github: 'activeadmin'
 gem 'devise'
 
 gem 'raganwald-andand', source: 'http://gems.github.com'
+
+gem 'haml'

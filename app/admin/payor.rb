@@ -10,7 +10,11 @@ show title: lambda {|p| [p.person.firstname, p.person.middlename, p.person.lastn
   columns do
     column do
       panel "test" do 
-        render 'partial'
+        table_for payor.organization do 
+          column do |org|
+            org.name
+          end
+        end
       end   
     end
     column do

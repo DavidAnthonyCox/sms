@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
     resources :people
     resources :identities
-    resources :identitys
+    # resources :identitys
     resources :organizations
     resources :contact_categories
     resources :course_offerings

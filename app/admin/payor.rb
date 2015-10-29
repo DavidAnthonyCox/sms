@@ -7,7 +7,18 @@ ActiveAdmin.register Payor do
 permit_params :person_id, :organization_id
 
 show title: lambda {|p| [p.person.firstname, p.person.middlename, p.person.lastname, "(Payor)"].join(" ") } do
-   render 'partial'
+  columns do
+    column do
+      panel "test" do 
+        render 'partial'
+      end   
+    end
+    column do
+      panel "some other test" do
+        render 'partial'
+      end
+    end
+  end
 end
 
 

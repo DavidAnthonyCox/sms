@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151029201144) do
+ActiveRecord::Schema.define(version: 20151102165810) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -110,19 +110,20 @@ ActiveRecord::Schema.define(version: 20151029201144) do
   end
 
   create_table "course_formats", force: true do |t|
-    t.string   "name",        null: false
-    t.text     "description", null: false
+    t.string   "name",               null: false
+    t.text     "description",        null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "course_offering_id"
   end
 
+  add_index "course_formats", ["course_offering_id"], name: "index_course_formats_on_course_offering_id"
+
   create_table "course_offerings", force: true do |t|
-    t.integer  "course_template_id"
-    t.integer  "course_format_id",   null: false
-    t.string   "name",               null: false
-    t.date     "start_date",         null: false
+    t.string   "name",            null: false
+    t.date     "start_date",      null: false
     t.date     "end_date"
-    t.time     "start_time",         null: false
+    t.time     "start_time",      null: false
     t.time     "end_time"
     t.string   "meeting_days"
     t.text     "note"
@@ -132,8 +133,6 @@ ActiveRecord::Schema.define(version: 20151029201144) do
     t.integer  "identity_id"
   end
 
-  add_index "course_offerings", ["course_format_id"], name: "index_course_offerings_on_course_format_id"
-  add_index "course_offerings", ["course_template_id"], name: "index_course_offerings_on_course_template_id"
   add_index "course_offerings", ["identity_id"], name: "index_course_offerings_on_identity_id"
   add_index "course_offerings", ["organization_id"], name: "index_course_offerings_on_organization_id"
 
@@ -164,7 +163,10 @@ ActiveRecord::Schema.define(version: 20151029201144) do
     t.datetime "updated_at"
     t.string   "default_name"
     t.integer  "time_limit"
+    t.integer  "course_offering_id"
   end
+
+  add_index "course_templates", ["course_offering_id"], name: "index_course_templates_on_course_offering_id"
 
   create_table "credit_vouchers", force: true do |t|
     t.string   "voucher_key"

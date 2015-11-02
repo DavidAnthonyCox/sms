@@ -17,3 +17,5 @@ class CreateCourseOfferings < ActiveRecord::Migration
   end
 end
 # has_one role_list, location
+
+    
